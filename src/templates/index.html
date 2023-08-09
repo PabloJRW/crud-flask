@@ -12,53 +12,54 @@
     
     <h1 class="text-center mt-5 mb-5 text-primary">Python-Flask-MySQL</h1>
 
+    <!-- Formas para la introducción de datos -->
     <div class="container">
         <div class="card shadow">
+        <div class="card-header text-center"> Introduce la información</div>
             <div class="card-body">
                 <form action="" method="POST">
                     <div class="row mb-3">
-                        <div class="col">
-                            <label>Username</label>
-                            <input type="text" class="form-control mb-3" name="username">
+                        <div class="row">
+                            <div class="col">
+                                <label>ID del Producto</label>
+                                <input type="text" class="form-control mb-3" name="idProducto">
+                            </div>
+                            <div class="col">
+                                <label>Nombre del Producto</label>
+                                <input type="text" class="form-control mb-3" name="nombreProducto">
+                            </div>
+                        
+                            <div class="col">
+                                <label>Proveedor</label>
+                                <input type="text" class="form-control mb-3" name="proveedorProducto">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Categoría</label>
+                                <input type="text" class="form-control mb-3" name="categoriaProducto">
+                            </div>
+                            <div class="col">
+                                <label>Lote</label>
+                                <input type="text" class="form-control mb-3" name="loteProducto">
+                            </div>
+                            <div class="col">
+                                <label>Cantidad de Inventario</label>
+                                <input type="text" class="form-control mb-3" name="cantidadProducto">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label>Descripción</label>
+                                <input type="text" class="form-control mb-3" name="descripcionProducto">
+                            </div>
                         </div>
                         <div class="col">
-                            <label>Name</label>
-                            <input type="text" class="form-control mb-3" name="name">
-                        </div>
-                        <div class="col">
-                            <label>Password</label>
-                            <input type="text" class="form-control mb-3" name="password">
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-primary mb-3 mt-4" type="submit">Save</button>
+                            <button class="btn btn-primary mb-3 mt-4" type="submit">Guardar Registro</button>
                         </div>
                     </div>
                 </form>
-
-
-                <!-- Tabla -->
-                <table class="table table-bordered">
-                    <thead>
-                        <th scope=""col>#</th>
-                        <th scope=""col>Username</th>
-                        <th scope=""col>Name</th>
-                        <th scope=""col>Password</th>
-                        <th scope=""col>Edit</th>
-                        <th scope=""col>Delete</th>
-                    </thead>
-                </table>
-                <tbody>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tbody>
-
-
-            </div>
-        </div>
     </div>
+ 
 </body>
 </html>
