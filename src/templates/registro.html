@@ -1,47 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+{% extends 'template.html' %}
 
-</head>
+{% block title %}Registros{% endblock %}
+
+{% block content %}
+
 <body>
-    <h1 class="text-center mt-5 mb-5 ">Vista de Registros</h1>
-    <div class="container">
+    <h1 class="text-center">REGISTROS ALMACENADOS</h1>
+    <div class="container-lg">
+        
         <div class="card">
-            <div class="card-header text-center">Información de Registros</div>
+            <div id="card-header" class="card-header text-center">Información de Registros</div>
             <div class="card-body">
 
-
-                    <!-- Tabla -->
-                    <table class="table table-bordered">
-                        <thead>
-                            <th scope=""col>ID</th>
-                            <th scope=""col>Nombre del Producto</th>
-                            <th scope=""col>Proveedor</th>
-                            <th scope=""col>Categoría</th>
-                            <th scope=""col>Lote</th>
-                            <th scope=""col>Cantidad</th>
-                            <th scope=""col>Detalles</th>
-                        </thead>
-                    </table>
+                <!-- Tabla -->
+                <table class="table table-responsive table-bordered">
+                    <thead>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre del Producto</th>
+                        <th scope="col">Proveedor</th>
+                        <th scope="col">Categoría</th>
+                        <th scope="col">Lote</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Descripción</th>
+                    </thead>
+                
                     <tbody>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        {% for p in productos %}
+                        <tr>
+                            <td> {{ p['id'] }} </td>
+                            <td> {{ p['producto'] }} </td>
+                            <td> {{ p['proveedor'] }} </td>
+                            <td> {{ p['categoria'] }} </td>
+                            <td> {{ p['lote'] }} </td>
+                            <td> {{ p['cantidad'] }} </td>
+                            <td> {{ p['descripcion'] }} </td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
-            
+                </table>
+                
             </div>
         </div>
-            
-        
+                
     </div>
 </body>
-</html>
+{% endblock %}

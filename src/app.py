@@ -8,6 +8,10 @@ template_dir = os.path.join(template_dir, 'src', 'templates')
 
 app = Flask(__name__, template_folder=template_dir)
 
+
+from productos import productos
+productos = productos
+
 # Rutas de la aplicación 
 @app.route('/')
 def home():
@@ -16,7 +20,7 @@ def home():
 
 @app.route('/registro')
 def registro():
-    return render_template('registro.html')
+    return render_template('registro.html', productos=productos)
 
 
 if __name__ == '__main__':
