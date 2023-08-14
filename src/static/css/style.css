@@ -16,7 +16,11 @@ h1 {
     background-color: #c07140;
 }
 
-button {
+.form-field {
+    width: 100%; /* O el ancho deseado */
+}
+
+#btn-submit {
     
       background-image: linear-gradient(#a74b13, #92400E);
       border: 1px solid #92400E;
@@ -42,24 +46,23 @@ button {
       white-space: nowrap;
 }
     
-button:disabled {
+#btn-submit:disabled {
     cursor: default;
     opacity: .3;
 }
     
-button:hover {
+#btn-submit:hover {
     background-image: linear-gradient(#92400E, #92400E);
     border-color: #92400E;
     text-decoration: none;
 }
-    
-button:active {
+    #btn-submit:active {
     background-image: linear-gradient(#7c5339, #92400E);
     border-color: #92400E;
     outline: none;
 }
     
-button:focus {
+#btn-submit:focus {
     box-shadow: rgba(185, 147, 88, 0.5) 0 0 0 3px;
     outline: none;
 }
