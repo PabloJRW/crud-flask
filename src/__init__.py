@@ -4,10 +4,13 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, EmailField, SubmitField
 from wtforms.validators import DataRequired, Length
 
+from flask_sqlalchemy import SQLAlchemy
 #from database import SessionLocal
 #from sqlalchemy.orm import Session
 
 from productos import productos
+
+db = SQLAlchemy()
 
 
 def create_app():
@@ -18,9 +21,12 @@ def create_app():
     app = Flask(__name__, template_folder=template_dir)
     app.config.from_mapping(
         DEBUG=True,
-        SECRET_KEY = 'dev'
+        SECRET_KEY = 'dev',
+        SQLALCHEMY_DATABASE_URI = "sqlite:///projects.db"
     )
     
+
+    db.init_app(app)
 
     # Rutas de la aplicación 
     @app.route('/registrar', methods=['GET', 'POST'])
@@ -66,6 +72,9 @@ def create_app():
 
         return render_template('auth/signup.html', form=form)
 
+
+    with app.app_context():
+        db.create_all()
 
     return app
 
