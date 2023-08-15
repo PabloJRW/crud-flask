@@ -22,26 +22,36 @@ def create_app():
     )
     
 
+    class RegistrarForm(FlaskForm):
+        id_ = StringField("Id del Producto")
+        nombre = StringField("Producto")
+        proveedor = StringField("Proveedor")
+        categoria = StringField("Categoría")
+        lote = StringField("Lote")
+        cantidad = StringField("Cantidad")
+        descripcion = StringField("Descripción")
+        submit = SubmitField("Guardar")
+
     # Rutas de la aplicación 
     @app.route('/registrar', methods=['GET', 'POST'])
     def home():
-        if request.method == 'POST':
-            id_ = request.form['idProducto']
-            nombre = request.form['nombreProducto']
-            proveedor = request.form['proveedorProducto']
-            categoria = request.form['categoriaProducto']
-            lote = request.form['loteProducto']
-            cantidad = request.form['cantidadProducto']
-            descripcion = request.form['descripcionProducto']
+        form = RegistrarForm()
+        if form.validate_on_submit():
+            id_ = form.id_.data
+            nombre = form.nombre.data
+            proveedor = form.proveedor.data
+            categoria = form.categoria.data
+            lote = form.lote.data
+            cantidad = form.cantidad.data
+            descripcion = form.descripcion.data
 
-            producto= [id_, nombre, proveedor, categoria, lote, cantidad, descripcion]
-        # db.add(producto)
+            f"{id_}, {nombre}, {proveedor}"
         
         return render_template('index.html')
 
-
-    @app.route('/registro')
-    def registro():
+    @app.route('/')
+    @app.route('/registros')
+    def registros():
         return render_template('registro.html', productos=productos)
 
 
