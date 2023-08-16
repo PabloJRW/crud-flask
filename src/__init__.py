@@ -27,6 +27,7 @@ def create_app():
     
 
     db.init_app(app)
+    
 
     # Rutas de la aplicación 
     @app.route('/registrar', methods=['GET', 'POST'])
@@ -45,7 +46,7 @@ def create_app():
         
         return render_template('index.html')
 
-
+    @app.route("/")
     @app.route('/registro')
     def registro():
         return render_template('registro.html', productos=productos)
