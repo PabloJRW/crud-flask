@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Registros{% endblock %}
+
+{% block content %}
+
+<body  style="margin-top: 120px;">
+    <h1 class="text-center mb-3">REGISTROS ALMACENADOS</h1>
+    <div class="container-lg">
+        
+        <div class="card">
+            <div id="card-header" class="card-header text-center">Información de Registros</div>
+            <div class="card-body">
+
+                <!-- Tabla -->
+                <table class="table table-responsive table-bordered">
+                    <thead>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre del Producto</th>
+                        <th scope="col">Proveedor</th>
+                        <th scope="col">Categoría</th>
+                        <th scope="col">Lote</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Descripción</th>
+                    </thead>
+                
+                    <tbody>
+                        {% for p in productos %}
+                        <tr>
+                            <td> {{ p['id'] }} </td>
+                            <td> {{ p['producto'] }} </td>
+                            <td> {{ p['proveedor'] }} </td>
+                            <td> {{ p['categoria'] }} </td>
+                            <td> {{ p['lote'] }} </td>
+                            <td> {{ p['cantidad'] }} </td>
+                            <td> {{ p['descripcion'] }} </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+                
+    </div>
+</body>
+{% endblock %}
