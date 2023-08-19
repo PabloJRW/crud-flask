@@ -1,6 +1,7 @@
 from app.main import db
 
 
+# Modelo para signup
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
@@ -17,7 +18,7 @@ class User(db.Model):
         return f"<User: {self.username}>"
     
 
-
+# Modelo para nuevos registros
 class Registro(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_producto = db.Column(db.String, nullable=False)
