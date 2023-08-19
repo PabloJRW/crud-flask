@@ -6,7 +6,8 @@ from productos import productos
 @main_bp.route('/')
 @main_bp.route('/registro')
 def registro():
-    return render_template('main/registro.html', productos=productos) 
+    return "Registro endpoint"
+    #return render_template('main/registro.html', productos=productos) 
 
 
 # Rutas de la aplicación 
