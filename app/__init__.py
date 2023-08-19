@@ -8,9 +8,11 @@ def create_app():
     app.config['SECRET_KEY'] = 'dev'
 
 
+    from .auth import auth_bp
     from .main import main_bp
 
 
+    app.register_blueprint(auth_bp)
     app.register_blueprint(main_bp)
 
 

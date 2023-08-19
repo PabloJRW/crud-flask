@@ -5,14 +5,14 @@ from wtforms.validators import DataRequired, Length
 from . import auth_bp
 
 
+@auth_bp.route("/user-registration")
+def signup():
+    return render_template('auth/user-registration.html')
+
+
 @auth_bp.route("/login")
 def login():
     return render_template('auth/login.html')
-
-
-@auth_bp.route("/signup")
-def signup():
-    return render_template('auth/signup.html')
 
 
 class SignUpForm(FlaskForm):
