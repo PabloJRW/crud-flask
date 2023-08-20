@@ -1,4 +1,4 @@
-from app.main import db
+from app import db
 
 
 # Modelo para signup
@@ -28,7 +28,7 @@ class Registro(db.Model):
     lote = db.Column(db.String, nullable=False)
     cantidad = db.Column(db.Integer, nullable=False)
     descripcion = db.Column(db.Text, nullable=False)
-    registrado_por = db.Column(db.Integer, db.ForeignKey('User.id'), nullable=False)
+    registrado_por = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
     def __init__(self, id, id_producto, nombre_producto, proveedor, categoria, lote, cantidad, descripcion, registrado_por):
@@ -43,4 +43,4 @@ class Registro(db.Model):
         self.registrado_por = registrado_por
 
     def __repr__(self):
-        return f"<User: {self.nombre_producto}>"
+        return f"<Producto: {self.nombre_producto}>"

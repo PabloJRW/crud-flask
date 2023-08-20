@@ -1,5 +1,6 @@
 from flask import render_template, request
 from app.main import  main_bp
+#from app.models import models
 from productos import productos
 
 
@@ -22,6 +23,6 @@ def nuevo_registro():
         descripcion = request.form['descripcionProducto']
 
         producto= [id_, nombre, proveedor, categoria, lote, cantidad, descripcion]
-    # db.add(producto)
     
-    return render_template('main/nuevo_registro.html') 
+    
+    return render_template('main/nuevo_registro.html')    
