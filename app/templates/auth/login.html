@@ -1,10 +1,31 @@
 {% extends 'auth/auth_base.html' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Log in{% endblock %}
 
 {% block content %}
-<body>
+<body style="padding-top: 100px;">
     <h1 class="text-center">Bienvenido!</h1>
+
+    <div class="container mt-5 sm d-flex justify-content-center align-items-center">
+        <div class="card shadow col-sm-6">
+            <div class="card-body">
+                <form action="" method="post">
+                    {{ loginform.hidden_tag() }}
+                    <div class="mt-5 me-5 mb-3 ms-5">
+                        {{ loginform.username_or_email.label(class="form-label") }}
+                        {{ loginform.username_or_email(class="form-control") }}
+                    </div>
+                    <div class="me-5 mb-3 ms-5">
+                        {{ loginform.password.label(class="form-label") }} 
+                        {{ loginform.password(class="form-control") }}
+                    </div>
+                    <div class="mt- ms-5 mb-3">
+                        {{ loginform.submit(id="btn-submit") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 {% endblock %}

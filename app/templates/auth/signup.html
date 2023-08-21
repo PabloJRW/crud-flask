@@ -8,12 +8,11 @@
   <h1 class="text-center">REGISTRO DE USUARIO</h1>
 
   <div class="container mt-5 sm d-flex justify-content-center align-items-center">
-    <div class="card col-sm-6" id="card-register">
-      <div class="card-header text-center" id="card-header">Datos del Usuario</div>
-      <div class="body">
+    <div class="card shadow col-sm-6" id="card-register">
+      <div class="card-body">
         <form action="" method="post">
           {{ form.hidden_tag() }}
-          <div class="mt-5 me-5 mb-3 ms-5">
+          <div class="mt-3 me-5 mb-3 ms-5">
             {{ form.username.label(class="form-label") }} 
             {{ form.username(class="form-control") }}
           </div>

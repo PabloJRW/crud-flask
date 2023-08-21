@@ -1,6 +1,6 @@
 from flask import render_template, request
 from app.main import  main_bp
-#from app.models import models
+from app.models import models
 from productos import productos
 
 

@@ -6,16 +6,6 @@ from . import auth_bp
 from app.models.models import User
 
 
-@auth_bp.route("/user-registration")
-def signup():
-    return render_template('auth/user-registration.html')
-
-
-@auth_bp.route("/login")
-def login():
-    return render_template('auth/login.html')
-
-
 class SignUpForm(FlaskForm):
     username = StringField("Nombre de Usuario: ", validators=[DataRequired(), Length(min=4, max=12)])
     email = EmailField("Correo Electrónico: ", validators=[DataRequired()])
@@ -36,3 +26,21 @@ def register():
         return f"{username}, {email}"
 
     return render_template('auth/signup.html', form=form)
+
+
+class LoginForm(FlaskForm):
+    username_or_email = StringField('Usuario o Email', validators=[DataRequired()])
+    password = PasswordField('Contraseña', validators=[DataRequired()])
+    submit = SubmitField('Log in')
+
+
+@auth_bp.route("/login", methods=['GET', 'POST'])
+def login():
+    loginform = LoginForm()
+    if loginform.validate_on_submit():
+        username_or_email = loginform.username_or_email.data
+        password = loginform.password.data
+
+    return render_template('auth/login.html', loginform=loginform)
+
+
