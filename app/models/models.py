@@ -21,7 +21,7 @@ class User(db.Model):
 
 # Modelo para nuevos registros
 class Registro(db.Model):
-    id = db.Column(db.Integer, primary_key=True) 
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True) 
     id_producto = db.Column(db.String, nullable=False)
     nombre_producto = db.Column(db.String, nullable=False)
     proveedor = db.Column(db.String, nullable=False)
@@ -29,11 +29,10 @@ class Registro(db.Model):
     lote = db.Column(db.String, nullable=False)   
     cantidad = db.Column(db.Integer, nullable=False)
     descripcion = db.Column(db.Text, nullable=False)
-    registrado_por = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    #registrado_por = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
-    def __init__(self, id, id_producto, nombre_producto, proveedor, categoria, lote, cantidad, descripcion, registrado_por):
-        self.id = id
+    def __init__(self, id_producto, nombre_producto, proveedor, categoria, lote, cantidad, descripcion):
         self.id_producto = id_producto
         self.nombre_producto = nombre_producto
         self.proveedor = proveedor
@@ -41,7 +40,7 @@ class Registro(db.Model):
         self.lote = lote
         self.cantidad = cantidad
         self.descripcion = descripcion
-        self.registrado_por = registrado_por
+        #self.registrado_por = registrado_por
 
     def __repr__(self):
         return f"<Producto: {self.nombre_producto}>"

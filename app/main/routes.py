@@ -1,7 +1,8 @@
 from flask import render_template, request
 from app.main import  main_bp
-from app.models import models
+from app.models.models import Registro
 from productos import productos
+from app import db
 
 
 @main_bp.route('/registros')
@@ -14,7 +15,7 @@ def registros():
 @main_bp.route('/nuevo-registro', methods=['GET', 'POST'])
 def nuevo_registro():
     if request.method == 'POST':
-        id_ = request.form['idProducto']
+        id_producto = request.form['idProducto']
         nombre = request.form['nombreProducto']
         proveedor = request.form['proveedorProducto']
         categoria = request.form['categoriaProducto']
@@ -22,7 +23,9 @@ def nuevo_registro():
         cantidad = request.form['cantidadProducto']
         descripcion = request.form['descripcionProducto']
 
-        producto= [id_, nombre, proveedor, categoria, lote, cantidad, descripcion]
-    
+        new_register = Registro(id_producto=id_producto, nombre_producto=nombre, proveedor=proveedor, 
+                                categoria=categoria, lote=lote, cantidad=cantidad, descripcion=descripcion)
+        db.session.add(new_register)
+        db.session.commit()
     
     return render_template('main/nuevo_registro.html')    
