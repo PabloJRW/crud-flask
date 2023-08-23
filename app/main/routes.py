@@ -7,8 +7,8 @@ from app import db
 
 @main_bp.route('/registros')
 def registros():
-    #return "Registro endpoint"
-    return render_template('main/registro.html', productos=productos) 
+    inventario = db.session.query(Registro).all()
+    return render_template('main/registro.html', productos=inventario) 
 
 
 # Rutas de la aplicación 

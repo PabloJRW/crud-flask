@@ -42,5 +42,4 @@ class Registro(db.Model):
         self.descripcion = descripcion
         #self.registrado_por = registrado_por
 
-    def __repr__(self):
-        return f"<Producto: {self.nombre_producto}>"
+    
