@@ -16,7 +16,7 @@
                 <table class="table table-responsive table-bordered">
                     <thead>
                         <th scope="col">ID</th>
-                        <th scope="col">Nombre del Producto</th>
+                        <th scope="col">Producto</th>
                         <th scope="col">Proveedor</th>
                         <th scope="col">Categoría</th>
                         <th scope="col">Lote</th>
@@ -28,7 +28,7 @@
                         {% for p in productos %}
                         <tr>
                             <td> {{ p['id'] }} </td>
-                            <td> {{ p['producto'] }} </td>
+                            <td> {{ p['nombre_producto'] }} </td>
                             <td> {{ p['proveedor'] }} </td>
                             <td> {{ p['categoria'] }} </td>
                             <td> {{ p['lote'] }} </td>
