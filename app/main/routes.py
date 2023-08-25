@@ -1,15 +1,16 @@
-from flask import render_template, request
+from flask import render_template, request, flash
 from app.main import  main_bp
 from app.models.models import Registro
 from productos import productos
 from app import db
 import csv
 from io import StringIO
+import pandas as pd
 
 
 @main_bp.route('/registros')
 def registros():
-    inventario = db.session.query(Registro).all()
+    inventario = db.session.query(Registro).order_by(Registro.id.desc()).all()
     return render_template('main/registro.html', productos=inventario) 
 
 
@@ -30,6 +31,8 @@ def nuevo_registro():
                                     categoria=categoria, lote=lote, cantidad=cantidad, descripcion=descripcion)
             db.session.add(new_register)
             db.session.commit()
+        
+        flash('Registrado exitosamente!.', 'success')
     
     return render_template('main/nuevo_registro.html')    
 
@@ -41,16 +44,24 @@ def upload_csv():
             uploaded_file = request.files['csv_file']
 
             if uploaded_file.filename != '':
-                csv_text = uploaded_file.read().decode('utf-8')
-                csv_file = StringIO(csv_text)
-                csv_reader = csv.reader(csv_file, delimiter=',', quotechar='"')
-                for row in csv_reader:
-                    id_producto, producto, proveedor, categoria, lote, cantidad, descripcion = row
+                try:
+                    data = pd.read_csv(uploaded_file, header=0)
+                    for index, row in data.iterrows():
+                        #id_producto, producto, proveedor, categoria, lote, cantidad, descripcion = row
 
-                    new_register = Registro(id_producto=id_producto, nombre_producto=producto, proveedor=proveedor, 
-                                    categoria=categoria, lote=lote, cantidad=cantidad, descripcion=descripcion)
-                    db.session.add(new_register)
+                        new_register = Registro(id_producto=row['id_producto'], 
+                                                nombre_producto=row['producto'], 
+                                                proveedor=row['proveedor'], 
+                                                categoria=row['categoria'], 
+                                                lote=row['lote'], 
+                                                cantidad=row['cantidad'], 
+                                                descripcion=row['descripcion'])
+                        db.session.add(new_register)
                     db.session.commit()
+                
+                except Exception as e:
+                    return f"Error al cargar archivo: {str(e)}"
+                    
 
 
                 # Puedes realizar más procesamiento con los datos del CSV aquí

@@ -59,6 +59,30 @@
                 </form>
             </div>
         </div>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="container mt-3">
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                    <div class="alert alert-success text-center" role="alert" id="flash-message">
+                        {{ messages[0] }}  <!-- Muestra el primer mensaje flash -->
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    setTimeout(function () {
+                    var flashMessage = document.getElementById('flash-message');
+                    if (flashMessage) {
+                        flashMessage.style.display = 'none';
+                    }
+                    }, 1000);  // Oculta el mensaje después de 1 segundo (1000 milisegundos)
+                });
+                </script>
+            {% endif %}
+        {% endwith %}
             
     </div>
 
