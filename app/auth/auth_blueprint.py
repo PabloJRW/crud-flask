@@ -1,4 +1,4 @@
-from flask import render_template, request, url_for, redirect, flash
+from flask import render_template, request, url_for, redirect, flash, session, g
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import auth_bp
 from .forms import SignUpForm, LoginForm 
@@ -23,7 +23,7 @@ def signup():
             return redirect(url_for('auth.signup'))
         
         # Crea un nuevo objeto User y lo agrega a la base de datos
-        new_user = User(username=username, email=email, password=password)
+        new_user = User(username=username, email=email, password=generate_password_hash(password))
         db.session.add(new_user)
         db.session.commit()
         print(new_user.id)
@@ -41,6 +41,18 @@ def login():
     if loginform.validate_on_submit():
         username_or_email = loginform.username_or_email.data
         password = loginform.password.data
+
+        existing_user = User.query.filter_by(username=username_or_email).first()
+        if existing_user:
+            if check_password_hash(existing_user.password, password):
+                session.clear()
+                session['user_id'] = existing_user.id
+                flash('Sesión iniciada!.')
+                return redirect(url_for('main.registros'))
+            
+        else:
+            flash('Usuario o contraseña incorrecta!.', 'danger')
+            return redirect(url_for('auth.login'))
 
     return render_template('auth/login.html', loginform=loginform)
 

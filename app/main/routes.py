@@ -46,7 +46,7 @@ def upload_csv():
             if uploaded_file.filename != '':
                 try:
                     data = pd.read_csv(uploaded_file, header=0)
-                    for index, row in data.iterrows():
+                    for _, row in data.iterrows():
                         #id_producto, producto, proveedor, categoria, lote, cantidad, descripcion = row
 
                         new_register = Registro(id_producto=row['id_producto'], 
