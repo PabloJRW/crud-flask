@@ -57,3 +57,17 @@ def login():
     return render_template('auth/login.html', loginform=loginform)
 
 
+@auth_bp.before_app_request
+def load_logged_in_user():
+    """
+    Carga el usuario autenticado (si existe) antes de cada solicitud.
+    """
+    user_id = session.get('user_id')
+
+    if user_id:
+        # Consulta la base de datos para obtener el usuario con el ID de sesión.
+        # Si no se encuentra el usuario, responderá con un error 404 (Not Found).
+        g.user = User.query.get_or_404(user_id)
+    else:
+        # Si no hay un ID de usuario en la sesión, establece g.user como None.
+        g.user = None
