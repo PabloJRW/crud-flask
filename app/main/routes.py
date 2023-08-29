@@ -6,9 +6,10 @@ from app import db
 import csv
 from io import StringIO
 import pandas as pd
-
+from app.auth.auth_blueprint import login_required
 
 @main_bp.route('/registros')
+@login_required
 def registros():
     inventario = db.session.query(Registro).order_by(Registro.id.desc()).all()
     return render_template('main/registro.html', productos=inventario) 
@@ -16,6 +17,7 @@ def registros():
 
 # Rutas de la aplicación 
 @main_bp.route('/nuevo-registro', methods=['GET', 'POST'])
+@login_required
 def nuevo_registro():
     if request.method == 'POST':
         if 'submitFormulario' in request.form:
@@ -38,6 +40,7 @@ def nuevo_registro():
 
 
 @main_bp.route('/subir-csv', methods=['GET', 'POST'])
+@login_required
 def upload_csv():
     if request.method == 'POST':
         if 'submitCSV' in request.form:

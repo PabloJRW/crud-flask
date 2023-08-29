@@ -4,6 +4,7 @@ from . import auth_bp
 from .forms import SignUpForm, LoginForm 
 from app.models.models import User
 from app import db
+import functools
 
 
 # Endpoint para el registro de usuarios nuevos
@@ -35,6 +36,7 @@ def signup():
 
 
 # # Endpoint para el inicio de sesión de usuarios existentes
+@auth_bp.route("/")
 @auth_bp.route("/login", methods=['GET', 'POST'])
 def login():
     loginform = LoginForm()
@@ -71,3 +73,20 @@ def load_logged_in_user():
     else:
         # Si no hay un ID de usuario en la sesión, establece g.user como None.
         g.user = None
+
+
+    
+@auth_bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('auth.login'))
+
+
+
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for('auth.login'))
+        return view(**kwargs)
+    return wrapped_view
