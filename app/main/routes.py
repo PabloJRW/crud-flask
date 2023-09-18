@@ -1,4 +1,5 @@
 from flask import render_template, request, flash
+from sqlalchemy import func
 from app.main import  main_bp
 from app.models.models import Registro
 from productos import productos
@@ -37,6 +38,17 @@ def nuevo_registro():
         flash('Registrado exitosamente!.', 'success')
     
     return render_template('main/nuevo_registro.html')    
+
+
+##########################
+@main_bp.route('/inventario')
+@login_required
+def inventario():
+    # Realiza la consulta para sumar los valores por nombre
+    inventario = db.session.query(Registro.nombre_producto, func.sum(Registro.cantidad)).group_by(Registro.nombre_producto).all()
+    print([r[0] for r in inventario])
+    return render_template('/main/inventario.html', inventario=inventario)
+
 
 
 @main_bp.route('/subir-csv', methods=['GET', 'POST'])
