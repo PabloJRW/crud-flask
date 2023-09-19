@@ -5,27 +5,38 @@
 {% block content %}
 
 
+<body  style="margin-top: 120px;">
+    <h1 class="text-center mb-3">INVENTARIO DE MATERIALES</h1>
+    <div class="container-lg d-flex justify-content-center">
 
-     <!-- Tabla -->
-     <table class="table table-responsive table-bordered">
-        <thead>
-            <th scope="col"></th>
-            <th scope="col">ID Producto</th>
-            <th scope="col">Producto</th>
-        
-        </thead>
-    
-        <tbody>
-            {% for i in inventario %}
-            
-            <tr>
-                <td> {{ i[0] }} </td>
-                <td> {{ i[1] }}</td>
+        <div class="card col-md-9">
+            <div id="card-header" class="card-header text-center">Inventario de Materiales</div>
+            <div class="card-body">
+
+
+                <!-- Tabla -->
+                <table class="table table-responsive table-bordered">
+                    <thead>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Cantidad</th>
+                    
+                    </thead>
                 
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                    <tbody>
+                        
+                        {% for i in inventario %}
+                        
+                        <tr>
+                            <td> {{ i[0] }} </td>
+                            <td> {{ i[1] }}</td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            
+            </div>
+        </div>
 
                         
 

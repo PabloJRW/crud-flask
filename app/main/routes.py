@@ -9,14 +9,16 @@ from io import StringIO
 import pandas as pd
 from app.auth.auth_blueprint import login_required
 
-@main_bp.route('/registros')
+
+# ENDPOINT A LA PÁGINA PARA VER LOS REGISTROS REALIZADOS
+@main_bp.route('/historial')
 @login_required
-def registros():
+def historial():
     inventario = db.session.query(Registro).order_by(Registro.id.desc()).all()
-    return render_template('main/registro.html', productos=inventario) 
+    return render_template('main/historial.html', productos=inventario) 
 
 
-# Rutas de la aplicación 
+# ENDPOINT A LA PÁGINA PARA INGRESAR MATERIALES
 @main_bp.route('/nuevo-registro', methods=['GET', 'POST'])
 @login_required
 def nuevo_registro():
@@ -41,14 +43,15 @@ def nuevo_registro():
 
 
 ##########################
+
+# ENDPOINT DE LA PÁGINA INVENTARIO
 @main_bp.route('/inventario')
 @login_required
 def inventario():
     # Realiza la consulta para sumar los valores por nombre
     inventario = db.session.query(Registro.nombre_producto, func.sum(Registro.cantidad)).group_by(Registro.nombre_producto).all()
-    print([r[0] for r in inventario])
-    return render_template('/main/inventario.html', inventario=inventario)
 
+    return render_template('/main/inventario.html', inventario=inventario)
 
 
 @main_bp.route('/subir-csv', methods=['GET', 'POST'])
