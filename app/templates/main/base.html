@@ -44,11 +44,16 @@
                                 </form>
                             </li>
                             <li class="nav-item">
-                                <span class="nav-link active">{{ g.user.username }}</span>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button">
+                                        {{ g.user.username }}
+                                    </button>
+                                    <div class="dropdown-menu" >
+                                        <a href="{{ url_for('auth.logout')}}" class="dropdown-item">Cerrar Sesión</a>
+                                    </div>
+                                </div>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ url_for('auth.logout')}}" class="nav-link">Cerrar Sesión</a>
-                            </li>
+                
                         </ul>
                     </div>
                 </div>

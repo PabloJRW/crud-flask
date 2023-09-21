@@ -50,7 +50,7 @@ def login():
                 session.clear()
                 session['user_id'] = existing_user.id
                 flash('Sesión iniciada!.')
-                return redirect(url_for('main.registros'))
+                return redirect(url_for('main.historial'))
             
         else:
             flash('Usuario o contraseña incorrecta!.', 'danger')

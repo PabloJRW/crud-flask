@@ -55,7 +55,7 @@ def inventario():
 
 
 @main_bp.route('/subir-csv', methods=['GET', 'POST'])
-@login_required
+@login_required  
 def upload_csv():
     if request.method == 'POST':
         if 'submitCSV' in request.form:
